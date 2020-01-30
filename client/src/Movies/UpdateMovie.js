@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 // const initialState = {
@@ -10,6 +10,7 @@ import axios from "axios";
 
 const UpdateMovie = props => {
   const [item, setItem] = useState({
+    id: props.movie.id,
     title: props.movie.title,
     director: props.movie.director,
     metascore: props.movie.metascore,
@@ -24,13 +25,16 @@ const UpdateMovie = props => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .put(`http://localhost/5000/api/movies/${props.movie.id}`, item)
-      .then(res => console.log(res))
+      .put(`http://localhost:5000/api/movies/${props.movie.id}`, item)
+      .then(res =>
+        // console.log(res)
+        props.history.push("/")
+      )
       .catch(err => console.log(err));
   };
 
-  console.log(props, "update props");
-  console.log(item, "item");
+  // console.log(props, "update props");
+  // console.log(item, "item");
 
   return (
     <div>
@@ -57,13 +61,24 @@ const UpdateMovie = props => {
           onChange={handleChange}
           value={item.metascore}
         />
-        <input
+        {/* <input
           type="text"
           name="stars"
           placeholder="stars"
           onChange={handleChange}
           value={item.stars}
-        />
+        /> */}
+        {props.movie.stars.map(star => {
+          return (
+            <input
+              type="text"
+              name="stars"
+              placeholder="stars"
+              onChange={handleChange}
+              value={star}
+            />
+          );
+        })}
         <button>Update</button>
       </form>
     </div>
