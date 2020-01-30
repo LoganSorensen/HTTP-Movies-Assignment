@@ -22,10 +22,21 @@ const UpdateMovie = props => {
     setItem({ ...item, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = e => {          
     e.preventDefault();
+    let stars;
+    if(item.stars instanceof Array) {
+      stars = item.stars
+    } else {
+      stars = item.stars.split(',')
+    }
+
+    const payload = {
+      ...item, stars
+    }
+
     axios
-      .put(`http://localhost:5000/api/movies/${props.movie.id}`, item)
+      .put(`http://localhost:5000/api/movies/${props.movie.id}`, payload)
       .then(res =>
         // console.log(res)
         props.history.push("/")
@@ -68,17 +79,18 @@ const UpdateMovie = props => {
           onChange={handleChange}
           value={item.stars}
         /> */}
-        {props.movie.stars.map(star => {
-          return (
+        {/* {props.movie.stars.map(star => {
+         
+          return ( */}
             <input
               type="text"
               name="stars"
               placeholder="stars"
               onChange={handleChange}
-              value={star}
+              value={item.stars}
             />
-          );
-        })}
+          {/* );
+        })} */}
         <button>Update</button>
       </form>
     </div>
