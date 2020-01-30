@@ -11,7 +11,7 @@ export default class Movie extends React.Component {
     this.state = {
       movie: null
     };
-    console.log(props, "props")
+    // console.log(props, "props")
   }
 
   componentDidMount() {
@@ -54,7 +54,7 @@ export default class Movie extends React.Component {
       return <div>Loading movie information...</div>;
     }
 
-    console.log(this.state, "state");
+    // console.log(this.state, "state");
 
     return (
       <div className="save-wrapper">
