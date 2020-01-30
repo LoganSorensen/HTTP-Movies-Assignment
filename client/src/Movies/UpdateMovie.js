@@ -45,7 +45,7 @@ const UpdateMovie = props => {
   };
 
   // console.log(props, "update props");
-  // console.log(item, "item");
+  console.log(item, "item");
 
   return (
     <div>
